@@ -30,6 +30,7 @@ export const FEEDS: FeedSource[] = [
 
   // ── Academic ──────────────────────────────────────────────────────────
   { name: 'Historical Materialism', url: 'https://www.historicalmaterialism.org/feed', category: 'academic', type: 'article' },
+  { name: 'Corpus Dergi', url: 'https://corpusdergi.com/feed/', category: 'academic', type: 'article', language: 'tr' },
 
   // ── Mainstream (20 biggest) ───────────────────────────────────────────
   { name: 'BBC News', url: 'https://feeds.bbci.co.uk/news/world/rss.xml', category: 'mainstream', type: 'article' },
