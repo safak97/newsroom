@@ -19,6 +19,17 @@ export default function Home() {
   const [source, setSource] = useState('')
   const [search, setSearch] = useState('')
   const [topic, setTopic] = useState<Topic | null>(null)
+  const [priorities, setPriorities] = useState<Topic[]>(() => {
+    try { return JSON.parse(localStorage.getItem('newsroom_priorities') ?? '[]') } catch { return [] }
+  })
+
+  function togglePriority(t: Topic) {
+    setPriorities((prev) => {
+      const next = prev.includes(t) ? prev.filter((p) => p !== t) : [...prev, t]
+      localStorage.setItem('newsroom_priorities', JSON.stringify(next))
+      return next
+    })
+  }
 
   async function loadArticles(force = false) {
     if (!force) {
@@ -65,18 +76,25 @@ export default function Home() {
   }, [articles])
 
   const filtered = useMemo(() => {
-    return articles.filter((a) => {
-      if (category !== 'all' && a.category !== category) return false
-      if (type !== 'all' && a.type !== type) return false
-      if (source && a.source !== source) return false
-      if (topic && !a.topics?.includes(topic)) return false
-      if (search) {
-        const q = search.toLowerCase()
-        return a.title.toLowerCase().includes(q) || a.source.toLowerCase().includes(q) || (a.summary ?? '').toLowerCase().includes(q)
-      }
-      return true
-    })
-  }, [articles, category, type, source, search, topic])
+    const prioritySet = new Set(priorities)
+    return articles
+      .filter((a) => {
+        if (category !== 'all' && a.category !== category) return false
+        if (type !== 'all' && a.type !== type) return false
+        if (source && a.source !== source) return false
+        if (topic && !a.topics?.includes(topic)) return false
+        if (search) {
+          const q = search.toLowerCase()
+          return a.title.toLowerCase().includes(q) || a.source.toLowerCase().includes(q) || (a.summary ?? '').toLowerCase().includes(q)
+        }
+        return true
+      })
+      .sort((a, b) => {
+        const aPriority = a.topics?.some((t) => prioritySet.has(t)) ? 1 : 0
+        const bPriority = b.topics?.some((t) => prioritySet.has(t)) ? 1 : 0
+        return bPriority - aPriority
+      })
+  }, [articles, category, type, source, search, topic, priorities])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -119,7 +137,7 @@ export default function Home() {
       />
 
       <div className="flex gap-6 px-4 md:px-8 py-6">
-        <Sidebar activeTopic={topic} counts={topicCounts} onTopic={setTopic} />
+        <Sidebar activeTopic={topic} counts={topicCounts} priorities={priorities} onTopic={setTopic} onTogglePriority={togglePriority} />
 
         <main className="flex-1 min-w-0">
           {loading && articles.length === 0 ? (
