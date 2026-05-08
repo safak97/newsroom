@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import Parser from 'rss-parser'
 import { FEEDS, type FeedCategory, type ContentType } from '@/lib/feeds'
+import { detectTopics, type Topic } from '@/lib/topics'
 
 export interface Article {
   id: string
@@ -14,6 +15,7 @@ export interface Article {
   imageUrl?: string
   videoId?: string
   language?: string
+  topics: Topic[]
 }
 
 const parser = new Parser({
@@ -55,6 +57,7 @@ async function fetchFeed(source: (typeof FEEDS)[0]): Promise<Article[]> {
       imageUrl: extractImage(item),
       videoId: item.videoId,
       language: source.language,
+      topics: detectTopics(item.title ?? '', item.contentSnippet ?? item.content ?? item.summary ?? ''),
     }))
   } catch {
     return []
