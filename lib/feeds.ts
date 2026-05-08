@@ -97,8 +97,17 @@ export const FEEDS: FeedSource[] = [
   { name: 'Göç İdaresi Başkanlığı', url: 'https://www.goc.gov.tr/rss', category: 'official', type: 'article', language: 'tr' },
   { name: 'TÜİK', url: 'https://data.tuik.gov.tr/rss/rss.xml', category: 'official', type: 'article', language: 'tr' },
   { name: 'TBMM', url: 'https://www.tbmm.gov.tr/rss/haberler.xml', category: 'official', type: 'article', language: 'tr' },
+  { name: 'Dışişleri Bakanlığı', url: 'https://www.mfa.gov.tr/rss.tr.mfa', category: 'official', type: 'article', language: 'tr' },
+  { name: 'İçişleri Bakanlığı', url: 'https://www.icisleri.gov.tr/rss', category: 'official', type: 'article', language: 'tr' },
+  { name: 'Cumhurbaşkanlığı', url: 'https://www.tccb.gov.tr/haberler/rss', category: 'official', type: 'article', language: 'tr' },
 
   // ── NGOs, Foundations & Research ──────────────────────────────────────
+  { name: 'Mediendienst Integration', url: 'https://mediendienst-integration.de/feed/', category: 'ngo', type: 'article', language: 'de' },
+  { name: 'İHD (İnsan Hakları Derneği)', url: 'https://www.ihd.org.tr/feed/', category: 'ngo', type: 'article', language: 'tr' },
+  { name: 'Mazlum-Der', url: 'https://mazlumder.org/feed/', category: 'ngo', type: 'article', language: 'tr' },
+  { name: 'Mülteci-Der', url: 'https://multeci-der.org/feed/', category: 'ngo', type: 'article', language: 'tr' },
+  { name: 'Amnesty Türkiye', url: 'https://www.amnesty.org.tr/feed/', category: 'ngo', type: 'article', language: 'tr' },
+  { name: 'Helsinki Yurttaşlar Derneği', url: 'https://www.hyd.org.tr/feed/', category: 'ngo', type: 'article', language: 'tr' },
   { name: 'ReliefWeb', url: 'https://reliefweb.int/updates/rss.xml', category: 'ngo', type: 'article' },
   { name: 'OpenDemocracy', url: 'https://www.opendemocracy.net/en/rss.xml', category: 'ngo', type: 'article' },
   { name: 'Brookings Institution', url: 'https://www.brookings.edu/feed/', category: 'ngo', type: 'article' },
