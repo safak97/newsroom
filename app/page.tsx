@@ -6,6 +6,7 @@ import { type Topic } from '@/lib/topics'
 import ArticleCard from '@/components/ArticleCard'
 import Filters from '@/components/Filters'
 import Sidebar from '@/components/Sidebar'
+import TopicStrip from '@/components/TopicStrip'
 
 const CACHE_KEY = 'newsroom_articles'
 const CACHE_TTL = 15 * 60 * 1000
@@ -100,9 +101,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-4 md:px-8 py-4 flex items-center gap-4 flex-wrap">
-        <div>
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">The Newsroom</h1>
+      <header className="bg-white border-b border-gray-200 px-4 md:px-8 py-3 flex items-center gap-3 flex-wrap">
+        <div className="mr-auto">
+          <h1 className="text-lg font-bold text-gray-900 tracking-tight">The Newsroom</h1>
           <p className="text-xs text-gray-400">
             {lastUpdated
               ? `Updated ${lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
@@ -112,18 +113,18 @@ export default function Home() {
 
         <input
           type="search"
-          placeholder="Search articles..."
+          placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="flex-1 min-w-[200px] max-w-md text-sm border border-gray-300 rounded-full px-4 py-2 outline-none focus:border-blue-400 bg-gray-50"
+          className="w-full sm:w-auto sm:flex-1 sm:max-w-xs text-sm border border-gray-300 rounded-full px-4 py-2 outline-none focus:border-blue-400 bg-gray-50"
         />
 
         <button
           onClick={() => loadArticles(true)}
           disabled={loading}
-          className="ml-auto text-sm px-4 py-2 rounded-full bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50 transition-colors"
+          className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50 transition-colors shrink-0"
         >
-          {loading ? 'Refreshing...' : '↻ Refresh'}
+          {loading ? '...' : '↻'}
         </button>
       </header>
 
@@ -136,6 +137,14 @@ export default function Home() {
         onType={setType}
         onSource={setSource}
         total={filtered.length}
+      />
+
+      <TopicStrip
+        activeTopic={topic}
+        counts={topicCounts}
+        priorities={priorities}
+        onTopic={setTopic}
+        onTogglePriority={togglePriority}
       />
 
       <div className="flex gap-6 px-4 md:px-8 py-6">
