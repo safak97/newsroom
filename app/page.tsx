@@ -4,6 +4,7 @@ import { type Article } from '@/app/api/feeds/route'
 import { type FeedCategory, type ContentType, FEEDS } from '@/lib/feeds'
 import { type Topic } from '@/lib/topics'
 import ArticleCard from '@/components/ArticleCard'
+import BlogCard from '@/components/BlogCard'
 import Filters from '@/components/Filters'
 import Sidebar from '@/components/Sidebar'
 import TopicStrip from '@/components/TopicStrip'
@@ -159,11 +160,21 @@ export default function Home() {
           ) : filtered.length === 0 ? (
             <div className="text-center py-24 text-gray-400 text-sm">No articles match your filters.</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {filtered.map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
-            </div>
+            filtered.some((a) => a.category === 'blog') && category === 'blog' ? (
+              <div className="max-w-2xl mx-auto flex flex-col gap-6">
+                {filtered.map((article) => (
+                  <BlogCard key={article.id} article={article} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                {filtered.map((article) => (
+                  article.category === 'blog'
+                    ? <BlogCard key={article.id} article={article} />
+                    : <ArticleCard key={article.id} article={article} />
+                ))}
+              </div>
+            )
           )}
         </main>
       </div>
