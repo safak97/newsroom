@@ -50,7 +50,7 @@ export const TOPICS: Record<Topic, TopicDef> = {
   'migration': {
     label: 'Migration',
     emoji: '🧳',
-    keywords: ['migrat', 'refugee', 'asylum', 'immigrat', 'border', 'displacement', 'stateless', 'deportat', 'detention', 'göç', 'mülteci', 'sığınmacı', 'migration', 'flüchtling', 'asyl'],
+    keywords: ['migrat', 'refugee', 'asylum', 'immigrat', 'border', 'displacement', 'stateless', 'deportat', 'detention', 'göç', 'mülteci', 'sığınmacı', 'migration', 'flüchtling', 'asyl', 'integration', 'einwanderung', 'zuwanderung', 'abschiebung', 'aufenthalt', 'ausländer', 'geflüchtete', 'schutzsuchende', 'bamf', 'visumpflicht', 'göçmen', 'iltica', 'sınır dışı'],
   },
   'environment': {
     label: 'Environment',
