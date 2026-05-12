@@ -10,12 +10,10 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ activeTopic, counts, priorities, onTopic, onTogglePriority }: SidebarProps) {
-  const prioritySet = new Set(priorities)
-
   const entries = Object.entries(TOPICS) as [Topic, (typeof TOPICS)[Topic]][]
   const sorted = [
-    ...entries.filter(([k]) => prioritySet.has(k)),
-    ...entries.filter(([k]) => !prioritySet.has(k)),
+    ...entries.filter(([k]) => priorities.includes(k)).sort((a, b) => priorities.indexOf(a[0]) - priorities.indexOf(b[0])),
+    ...entries.filter(([k]) => !priorities.includes(k)),
   ]
 
   return (
@@ -24,7 +22,7 @@ export default function Sidebar({ activeTopic, counts, priorities, onTopic, onTo
         <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Topics</p>
           {priorities.length > 0 && (
-            <span className="text-xs text-amber-500 font-medium">{priorities.length} pinned</span>
+            <span className="text-xs text-blue-500 font-medium">{priorities.length} ranked</span>
           )}
         </div>
         <nav className="py-2">
@@ -38,46 +36,56 @@ export default function Sidebar({ activeTopic, counts, priorities, onTopic, onTo
           </button>
 
           {priorities.length > 0 && (
-            <div className="mx-3 my-1 border-t border-dashed border-amber-200" />
+            <div className="mx-3 my-1 border-t border-dashed border-blue-200" />
           )}
 
           {sorted.map(([key, def]) => {
             const count = counts[key] ?? 0
-            const isPriority = prioritySet.has(key)
+            const rank = priorities.indexOf(key)
+            const isRanked = rank !== -1
             const isActive = activeTopic === key
             return (
               <div
                 key={key}
                 className={`flex items-center group transition-colors ${
-                  isActive ? 'bg-gray-900' : isPriority ? 'bg-amber-50 hover:bg-amber-100' : 'hover:bg-gray-50'
+                  isActive ? 'bg-gray-900' : isRanked ? 'bg-blue-50 hover:bg-blue-100' : 'hover:bg-gray-50'
                 }`}
               >
                 <button
                   onClick={() => onTopic(key)}
                   className="flex-1 flex items-center justify-between px-4 py-2 text-sm min-w-0"
                 >
-                  <span className={`flex items-center gap-2 ${isActive ? 'text-white' : isPriority ? 'text-amber-900' : 'text-gray-700'}`}>
+                  <span className={`flex items-center gap-2 ${isActive ? 'text-white' : isRanked ? 'text-blue-900' : 'text-gray-700'}`}>
                     <span>{def.emoji}</span>
                     <span className="truncate">{def.label}</span>
                   </span>
                   {count > 0 && (
                     <span className={`text-xs px-1.5 py-0.5 rounded-full ml-1 shrink-0 ${
-                      isActive ? 'bg-white/20 text-white' : isPriority ? 'bg-amber-200 text-amber-800' : 'bg-gray-100 text-gray-500'
+                      isActive ? 'bg-white/20 text-white' : isRanked ? 'bg-blue-200 text-blue-800' : 'bg-gray-100 text-gray-500'
                     }`}>
                       {count}
                     </span>
                   )}
                 </button>
+
                 <button
                   onClick={(e) => { e.stopPropagation(); onTogglePriority(key) }}
-                  title={isPriority ? 'Unpin topic' : 'Pin to top'}
-                  className={`pr-3 pl-1 py-2 text-base transition-opacity ${
-                    isPriority
-                      ? 'opacity-100 text-amber-400'
-                      : 'opacity-0 group-hover:opacity-100 text-gray-300 hover:text-amber-400'
+                  title={isRanked ? `Priority ${rank + 1} — click to remove` : 'Add to priority ranking'}
+                  className={`pr-3 pl-1 py-2 shrink-0 transition-opacity ${
+                    isRanked
+                      ? 'opacity-100'
+                      : 'opacity-0 group-hover:opacity-60'
                   }`}
                 >
-                  {isPriority ? '★' : '☆'}
+                  {isRanked ? (
+                    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                      {rank + 1}
+                    </span>
+                  ) : (
+                    <span className="w-5 h-5 flex items-center justify-center rounded-full border border-gray-300 text-gray-400 text-xs">
+                      +
+                    </span>
+                  )}
                 </button>
               </div>
             )

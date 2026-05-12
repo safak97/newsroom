@@ -76,7 +76,6 @@ export default function Home() {
   }, [articles])
 
   const filtered = useMemo(() => {
-    const prioritySet = new Set(priorities)
     return articles
       .filter((a) => {
         if (category !== 'all' && a.category !== category) return false
@@ -90,9 +89,12 @@ export default function Home() {
         return true
       })
       .sort((a, b) => {
-        const aPriority = a.topics?.some((t) => prioritySet.has(t)) ? 1 : 0
-        const bPriority = b.topics?.some((t) => prioritySet.has(t)) ? 1 : 0
-        return bPriority - aPriority
+        const rankOf = (art: typeof a) => {
+          if (!art.topics?.length || !priorities.length) return Infinity
+          const ranks = art.topics.map((t) => priorities.indexOf(t)).filter((r) => r !== -1)
+          return ranks.length ? Math.min(...ranks) : Infinity
+        }
+        return rankOf(a) - rankOf(b)
       })
   }, [articles, category, type, source, search, topic, priorities])
 
