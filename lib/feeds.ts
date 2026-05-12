@@ -28,9 +28,24 @@ export const FEEDS: FeedSource[] = [
   { name: 'TeleSUR English', url: 'https://www.telesurenglish.net/rss/', category: 'left', type: 'article' },
   { name: 'Kawsachun News', url: 'https://kawsachunnews.com/feed/', category: 'left', type: 'article' },
 
-  // ── Academic ──────────────────────────────────────────────────────────
+  // ── Academic: Marxist / Leftist ───────────────────────────────────────
   { name: 'Historical Materialism', url: 'https://www.historicalmaterialism.org/feed', category: 'academic', type: 'article' },
+  { name: 'New Left Review', url: 'https://newleftreview.org/feed', category: 'academic', type: 'article' },
+  { name: 'Catalyst Journal', url: 'https://catalyst-journal.com/feed', category: 'academic', type: 'article' },
+  { name: 'Jacobin', url: 'https://jacobin.com/feed', category: 'academic', type: 'article' },
+  { name: 'n+1', url: 'https://www.nplusonemag.com/feed/', category: 'academic', type: 'article' },
+  { name: 'International Socialism Journal', url: 'https://isj.org.uk/rss', category: 'academic', type: 'article' },
+  { name: 'Boston Review', url: 'https://www.bostonreview.net/feed/', category: 'academic', type: 'article' },
+  { name: 'Dissent Magazine', url: 'https://www.dissentmagazine.org/feed/', category: 'academic', type: 'article' },
   { name: 'Corpus Dergi', url: 'https://corpusdergi.com/feed/', category: 'academic', type: 'article', language: 'tr' },
+
+  // ── Academic: Mainstream / Accessible ────────────────────────────────
+  { name: 'JSTOR Daily', url: 'https://daily.jstor.org/feed', category: 'academic', type: 'article' },
+  { name: 'The Conversation', url: 'https://theconversation.com/us/articles.atom', category: 'academic', type: 'article' },
+  { name: 'Aeon', url: 'https://aeon.co/feed.rss', category: 'academic', type: 'article' },
+  { name: 'The Philosopher', url: 'https://thephilosopher1923.substack.com/feed', category: 'academic', type: 'article' },
+  { name: 'Public Books', url: 'https://www.publicbooks.org/feed/', category: 'academic', type: 'article' },
+  { name: 'LA Review of Books', url: 'https://lareviewofbooks.org/feed/', category: 'academic', type: 'article' },
 
   // ── Mainstream (20 biggest) ───────────────────────────────────────────
   { name: 'BBC News', url: 'https://feeds.bbci.co.uk/news/world/rss.xml', category: 'mainstream', type: 'article' },
