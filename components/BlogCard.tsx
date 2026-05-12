@@ -14,7 +14,7 @@ function timeAgo(dateStr: string): string {
 
 export default function BlogCard({ article }: { article: Article }) {
   const [expanded, setExpanded] = useState(false)
-  const hasFullContent = !!article.fullContent
+  const hasFullContent = !!(article.fullContent && article.fullContent.length > 200)
 
   return (
     <article className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
@@ -46,7 +46,7 @@ export default function BlogCard({ article }: { article: Article }) {
         {/* Content */}
         {expanded && hasFullContent ? (
           <div
-            className="prose prose-sm max-w-none text-gray-700 prose-headings:font-bold prose-a:text-blue-600 prose-img:rounded-lg prose-img:my-3"
+            className="blog-content"
             dangerouslySetInnerHTML={{ __html: article.fullContent! }}
           />
         ) : (

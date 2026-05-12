@@ -42,12 +42,22 @@ function stripHtml(html: string, limit = 220): string {
 }
 
 function cleanHtml(html: string): string {
+  if (!html) return ''
   return html
-    ?.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+    // remove scripts, styles, iframes
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-    .replace(/(<img[^>]+)style="[^"]*"/gi, '$1')
-    .replace(/<div class="[^"]*subscribe[^"]*"[\s\S]*?<\/div>/gi, '')
-    .trim() ?? ''
+    .replace(/<iframe[^>]*>[\s\S]*?<\/iframe>/gi, '')
+    // remove subscribe / paywall / share divs
+    .replace(/<div[^>]*class="[^"]*(?:subscribe|paywall|share|footer|cta|button)[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '')
+    // remove tracking pixels and tiny images
+    .replace(/<img[^>]+width=["']?1["']?[^>]*>/gi, '')
+    // clean inline styles and classes from remaining tags
+    .replace(/\s*style="[^"]*"/gi, '')
+    .replace(/\s*class="[^"]*"/gi, '')
+    // open links in new tab
+    .replace(/<a /gi, '<a target="_blank" rel="noopener noreferrer" ')
+    .trim()
 }
 
 async function fetchFeed(source: (typeof FEEDS)[0]): Promise<Article[]> {

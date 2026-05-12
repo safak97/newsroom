@@ -148,10 +148,10 @@ export const FEEDS: FeedSource[] = [
   { name: 'Naked Capitalism', url: 'https://www.nakedcapitalism.com/feed', category: 'blog', type: 'article' },
 
   // Left magazines / journals (blog format)
-  { name: 'Tribune Magazine', url: 'https://tribunemag.co.uk/feed', category: 'blog', type: 'article' },
+  { name: 'Tribune Magazine', url: 'https://tribunemag.co.uk/feed/', category: 'blog', type: 'article' },
   { name: 'Salvage', url: 'https://salvage.zone/feed/', category: 'blog', type: 'article' },
   { name: 'Tempest Magazine', url: 'https://tempestmag.org/feed/', category: 'blog', type: 'article' },
-  { name: 'Current Affairs', url: 'https://www.currentaffairs.org/feed', category: 'blog', type: 'article' },
+  { name: 'Branko Milanovic', url: 'https://globalinequality.blogspot.com/feeds/posts/default?alt=rss', category: 'blog', type: 'article' },
 ]
 
 export const CATEGORY_LABELS: Record<FeedCategory, string> = {
