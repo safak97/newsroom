@@ -18,6 +18,7 @@ const categories: Array<{ key: FeedCategory | 'all'; label: string }> = [
   { key: 'mainstream', label: 'Mainstream' },
   { key: 'official', label: 'Official / Gov' },
   { key: 'ngo', label: 'NGO & Research' },
+  { key: 'blog', label: 'Blogs & Newsletters' },
   { key: 'german', label: 'German' },
   { key: 'turkish', label: 'Turkish' },
   { key: 'academic', label: 'Academic' },

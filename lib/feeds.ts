@@ -1,4 +1,4 @@
-export type FeedCategory = 'left' | 'mainstream' | 'german' | 'turkish' | 'academic' | 'official' | 'ngo'
+export type FeedCategory = 'left' | 'mainstream' | 'german' | 'turkish' | 'academic' | 'official' | 'ngo' | 'blog'
 export type ContentType = 'article' | 'video' | 'podcast'
 
 export interface FeedSource {
@@ -134,6 +134,24 @@ export const FEEDS: FeedSource[] = [
   { name: 'ACLU', url: 'https://www.aclu.org/rss/aclunews', category: 'ngo', type: 'article' },
   { name: 'Human Rights Watch', url: 'https://www.hrw.org/rss.xml', category: 'ngo', type: 'article' },
   { name: 'Our World in Data', url: 'https://ourworldindata.org/atom.xml', category: 'ngo', type: 'article' },
+
+  // ── Blogs & Newsletters ───────────────────────────────────────────────
+  // Personal / analytical
+  { name: 'Zvi Mowshowitz', url: 'https://thezvi.substack.com/feed', category: 'blog', type: 'article' },
+  { name: 'Construction Physics', url: 'https://www.construction-physics.com/feed', category: 'blog', type: 'article' },
+
+  // Marxist / left economist blogs
+  { name: 'Michael Roberts Blog', url: 'https://thenextrecession.wordpress.com/feed/', category: 'blog', type: 'article' },
+  { name: 'Branko Milanovic', url: 'https://globalinequality.blogspot.com/feeds/posts/default', category: 'blog', type: 'article' },
+  { name: 'David Harvey', url: 'https://davidharvey.org/feed/', category: 'blog', type: 'article' },
+  { name: 'Doug Henwood (LBO)', url: 'https://lbo-news.com/feed/', category: 'blog', type: 'article' },
+  { name: 'Naked Capitalism', url: 'https://www.nakedcapitalism.com/feed', category: 'blog', type: 'article' },
+
+  // Left magazines / journals (blog format)
+  { name: 'Tribune Magazine', url: 'https://tribunemag.co.uk/feed', category: 'blog', type: 'article' },
+  { name: 'Salvage', url: 'https://salvage.zone/feed/', category: 'blog', type: 'article' },
+  { name: 'Tempest Magazine', url: 'https://tempestmag.org/feed/', category: 'blog', type: 'article' },
+  { name: 'Current Affairs', url: 'https://www.currentaffairs.org/feed', category: 'blog', type: 'article' },
 ]
 
 export const CATEGORY_LABELS: Record<FeedCategory, string> = {
@@ -144,6 +162,7 @@ export const CATEGORY_LABELS: Record<FeedCategory, string> = {
   academic: 'Academic',
   official: 'Official / Gov',
   ngo: 'NGO & Research',
+  blog: 'Blogs & Newsletters',
 }
 
 export const CATEGORY_COLORS: Record<FeedCategory, string> = {
@@ -154,6 +173,7 @@ export const CATEGORY_COLORS: Record<FeedCategory, string> = {
   academic: 'bg-purple-100 text-purple-800 border-purple-200',
   official: 'bg-slate-100 text-slate-800 border-slate-200',
   ngo: 'bg-teal-100 text-teal-800 border-teal-200',
+  blog: 'bg-green-100 text-green-800 border-green-200',
 }
 
 export const TYPE_ICONS: Record<ContentType, string> = {
